@@ -75,6 +75,4 @@ const updateUI = async () => {
 }
 
 
-// EventListeners
-
-document.getElementById('generate').addEventListener('click', action);
+export { action }
