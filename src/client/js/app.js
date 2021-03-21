@@ -1,10 +1,17 @@
 /* Global Variables */
 
-let baseURL = 'https://api.openweathermap.org/data/2.5/weather?zip=';
-let apiKey = ',us&appid=73ce595a0ec8725af0a3bf9dfd38dcc4';
 
 
 // Functions
+function buildURL (code, country) {
+    let userName = `&username=${process.env.USER_NAME}`;
+    let baseURL = 'http://api.geonames.org/postalCodeSearchJSON?';
+    let postalCode = `&postalcode=${code}`;
+    let countryTag = `&country=${country}`;
+    let url = baseURL+postalCode+countryTag+userName;
+    return url
+}
+
 
 function currentDate () {
     let d = new Date();
@@ -20,8 +27,9 @@ function tempInFahrenheit (data) {
 
 
 function action (e) {
-    let zip = document.getElementById('zip').value;
-    let feelings = document.getElementById('feelings').value;
+    let code = document.getElementById('zip').value;
+    let country = document.getElementById('feelings').value;
+    let url = buildURL(code, country);
     getWeather(baseURL, zip, apiKey)
     .then(function (data) {
         postData('/add', {temperature: tempInFahrenheit(data), date: currentDate(), feelings: feelings});
