@@ -3,12 +3,16 @@
 
 
 // Functions
-function buildURL (code, country) {
+function buildURL (city, country) {
+    let rows = 1;
     let userName = `&username=${process.env.USER_NAME}`;
     let baseURL = 'http://api.geonames.org/postalCodeSearchJSON?';
-    let postalCode = `&postalcode=${code}`;
+    // let postalCode = `&postalcode=${code}`;
+    city.replace(/\s/g, '%20');
+    let placeName = `&placename=${city}`;
     let countryTag = `&country=${country}`;
-    let url = baseURL+postalCode+countryTag+userName;
+    let maxRows = `&maxRows=${rows}`;
+    let url = baseURL+placeName+countryTag+maxRows+userName;
     return url
 }
 
@@ -27,10 +31,10 @@ function buildURL (code, country) {
 
 
 function action (e) {
-    let code = document.getElementById('zip').value;
-    let country = document.getElementById('feelings').value;
-    let url = buildURL(code, country);
-    getWeather(url)
+    let city = document.getElementById('city').value;
+    let country = document.getElementById('country').value;
+    let url = buildURL(city, country);
+    getData(url)
     .then(function (data) {
         console.log(data)
         // postData('/add', {temperature: tempInFahrenheit(data), date: currentDate(), feelings: feelings});
@@ -41,7 +45,7 @@ function action (e) {
 
 // Async Functions
 
-const getWeather = async (url) => {
+const getData = async (url) => {
     const res = await fetch(url)
     try {
         const data = await res.json();
