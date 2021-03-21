@@ -1,4 +1,4 @@
-
+import { action } from './js/app'
 
 import './styles/style.scss'
 
