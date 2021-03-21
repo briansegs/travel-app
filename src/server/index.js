@@ -39,6 +39,8 @@ app.listen(port, function () {
 // Routes
 
 // GET All
+let projectData = [];
+
 app.get('/all', (req, res) => {
     res.send(projectData);
 })
