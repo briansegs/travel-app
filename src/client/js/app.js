@@ -13,35 +13,36 @@ function buildURL (code, country) {
 }
 
 
-function currentDate () {
-    let d = new Date();
-    let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
-    return newDate
-};
+// function currentDate () {
+//     let d = new Date();
+//     let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
+//     return newDate
+// };
 
 
-function tempInFahrenheit (data) {
-    let temp = (data.main.temp - 273.15) * 1.8 + 32;
-    return temp.toFixed(2)
-};
+// function tempInFahrenheit (data) {
+//     let temp = (data.main.temp - 273.15) * 1.8 + 32;
+//     return temp.toFixed(2)
+// };
 
 
 function action (e) {
     let code = document.getElementById('zip').value;
     let country = document.getElementById('feelings').value;
     let url = buildURL(code, country);
-    getWeather(baseURL, zip, apiKey)
+    getWeather(url)
     .then(function (data) {
-        postData('/add', {temperature: tempInFahrenheit(data), date: currentDate(), feelings: feelings});
-        updateUI()
+        console.log(data)
+        // postData('/add', {temperature: tempInFahrenheit(data), date: currentDate(), feelings: feelings});
+        // updateUI()
     })
 };
 
 
 // Async Functions
 
-const getWeather = async (baseURL, zip, apiKey) => {
-    const res = await fetch(baseURL+zip+apiKey)
+const getWeather = async (url) => {
+    const res = await fetch(url)
     try {
         const data = await res.json();
         return data;
