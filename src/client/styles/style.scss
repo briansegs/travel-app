@@ -33,6 +33,15 @@ section {
   padding: 0 0 60px;
 }
 
+#wrap > .container {
+  padding: 80px 15px 0;
+}
+
+.row {
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
 .navbar.navbar-fixed-top {
   background: none;
   box-shadow: none;
@@ -73,6 +82,16 @@ section {
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
+  width: 1170px;
+}
+
+.col-sm-6 {
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+  width: 50%;
+  float: left;
 }
 
 p.lead {
