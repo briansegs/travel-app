@@ -1,0 +1,56 @@
+@media (min-width: 768px) {
+	.navbar>.container .navbar-brand {
+    margin-left: -15px;
+	}
+}
+
+
+@media (min-width: 768px) {
+	.navbar-header {
+    float: left;
+	}
+}
+
+
+@media (min-width: 768px) {
+	.container {
+    width: 750px;
+	}
+}
+
+
+@media (min-width: 992px) {
+	.container {
+    width: 970px;
+	}
+}
+
+
+@media (min-width: 1200px) {
+	.container {
+    width: 1170px;
+	}
+}
+
+
+@media (min-width: 768px) {
+	.container>.navbar-header {
+    margin-right: 0;
+    margin-left: 0;
+	}
+}
+
+
+@media (min-width: 768px) {
+	.col-sm-6 {
+    width: 50%;
+		float: left;
+	}
+}
+
+
+@media (min-width: 768px) {
+  .lead {
+    font-size: 21px;
+  }
+}
