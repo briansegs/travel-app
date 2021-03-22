@@ -23,6 +23,7 @@ html, body {
 
 section {
   // margin: 50px 0;
+  display: block;
 }
 
 #wrap {
@@ -171,6 +172,8 @@ button {
 img {
   max-width: 100%;
   max-height: 500px;
+  vertical-align: middle;
+  border: 0;
 }
 
 p {
@@ -197,6 +200,11 @@ p.lead {
 a {
   cursor: pointer;
   color: #ff8c3a;
+
+}
+
+#front-splash {
+  width: 100%;
 }
 
 
