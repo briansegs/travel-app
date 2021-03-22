@@ -99,12 +99,22 @@ p.lead {
 }
 
 h1 {
-	margin-bottom: 1em;
+	margin-bottom: 16px;
+  font-size: 36px;
+  margin: 0.67em 0;
 }
 
 h3 {
 	margin-top: 15px;
 	margin-bottom: 15px;
+}
+
+h1, h3 {
+  margin-top: 20px;
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.1;
+  color: inherit;
 }
 
 h3 button {
