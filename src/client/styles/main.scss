@@ -1,0 +1,80 @@
+#footer {
+	height: 60px;
+}
+
+
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -60px;
+  padding: 0 0 60px;
+}
+
+
+.row {
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+
+#wrap > .container {
+  padding: 80px 15px 0;
+}
+
+
+.col-sm-6 {
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+
+#content h3 {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+
+#content h3 button {
+  margin-right: 10px;
+}
+
+
+.btn-default {
+  border: none;
+  background-color: #c5d6e9;
+  color: rgb(48, 48, 48);
+}
+
+
+.btn {
+	padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.3333333;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+
+.lead {
+	margin-top: 30px;
+  margin-bottom: 20px;
+  font-weight: 300;
+  line-height: 1.4;
+	font-size: 21px;
+}
+
+
+#front-splash {
+  width: 100%;
+}
