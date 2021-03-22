@@ -1,5 +1,15 @@
 html {
   overflow-y: scroll;
+
+}
+
+body {
+  margin: 0;
+}
+
+html, body {
+  height: 100%;
+  display: block;
 }
 
 section {
