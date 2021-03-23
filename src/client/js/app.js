@@ -42,23 +42,22 @@ function action (e) {
     let city = document.getElementById('city').value;
     let country = document.getElementById('country').value;
     let date = document.getElementById('date').value;
-    console.log(date);
-    let geoUrl = buildGeonames(city, country);
-    getData(geoUrl)
+    let geoURL = buildGeonames(city, country);
+    getData(geoURL)
     .then(function (data) {
-        console.log(data);
-        let lat1 = data['postalCodes'][0]['lat'];
-        let lon1 = data['postalCodes'][0]['lng'];
-        console.log(lat1, lon1);
-        let wBitURL = buildWbit(lat1, lon1);
+        let geoData = data['postalCodes'][0];
+        let latCord = geoData['lat'];
+        let lonCord = geoData['lng'];
+        let wBitURL = buildWbit(latCord, lonCord);
         getData(wBitURL)
         .then(function (data) {
             console.log(data);
-            console.log(data['data'][0]['valid_date'] === date)
-            if (data['data'][0]['valid_date'] === date) {
-                console.log(data['data'][0]);
+            let wBitData = data['data']
+            console.log(wBitData[0]['valid_date'] === date)
+            if (wBitData[0]['valid_date'] === date) {
+                console.log(wBitData[0]);
             } else {
-                console.log(data['data']);
+                console.log(wBitData);
             }
         })
         // postData('/add', {temperature: tempInFahrenheit(data), date: currentDate(), feelings: feelings});
