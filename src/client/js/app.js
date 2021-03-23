@@ -76,7 +76,13 @@ function action(e) {
     let date = document.getElementById('date').value;
     let location = document.getElementById('city').value;
     getPixData(location)
-
+        .then(function (pixData) {
+            let pixLst = pixData['hits'];
+            let randIndex = Math.floor(Math.random() * pixLst.length);
+            let randImg = pixLst[randIndex]['webformatURL'];
+            let locationImg = document.getElementById('front-splash');
+            locationImg.setAttribute('src', randImg);
+        });
     getGeoData(e, location)
         .then(function (data) {
             getwBitData(data)
