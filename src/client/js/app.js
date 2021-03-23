@@ -3,6 +3,13 @@
 
 
 // Functions
+function getGeoData (e) {
+    let city = document.getElementById('city').value;
+    let country = document.getElementById('country').value;
+    let geoURL = buildGeonames(city, country);
+    return getData(geoURL)
+}
+
 function buildGeonames (city, country) {
     let rows = 1;
     let userName = `&username=${process.env.USER_NAME}`;
@@ -15,6 +22,8 @@ function buildGeonames (city, country) {
     return url
 }
 
+
+
 function buildWbit (lat, lon) {
     let baseURL = 'https://api.weatherbit.io/v2.0/forecast/daily?';
     let latCord = `lat=${lat}`;
@@ -23,6 +32,8 @@ function buildWbit (lat, lon) {
     let url = baseURL+latCord+lonCord+apiKey;
     return url
 }
+
+
 
 
 // function currentDate () {
@@ -39,11 +50,8 @@ function buildWbit (lat, lon) {
 
 
 function action (e) {
-    let city = document.getElementById('city').value;
-    let country = document.getElementById('country').value;
     let date = document.getElementById('date').value;
-    let geoURL = buildGeonames(city, country);
-    getData(geoURL)
+    getGeoData(e)
     .then(function (data) {
         let geoData = data['postalCodes'][0];
         let latCord = geoData['lat'];
