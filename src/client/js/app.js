@@ -3,14 +3,14 @@
 
 
 // Functions
-function getGeoData (e) {
-    let city = document.getElementById('city').value;
+function getGeoData(e, location) {
+    let city = location;
     let country = document.getElementById('country').value;
     let geoURL = buildGeonames(city, country);
     return getData(geoURL)
 }
 
-function buildGeonames (city, country) {
+function buildGeonames(city, country) {
     let rows = 1;
     let userName = `&username=${process.env.USER_NAME}`;
     let baseURL = 'http://api.geonames.org/postalCodeSearchJSON?';
@@ -18,27 +18,44 @@ function buildGeonames (city, country) {
     let placeName = `&placename=${city}`;
     let countryTag = `&country=${country}`;
     let maxRows = `&maxRows=${rows}`;
-    let url = baseURL+placeName+countryTag+maxRows+userName;
+    let url = baseURL + placeName + countryTag + maxRows + userName;
     return url
 }
 
 
 
-function buildWBit (lat, lon) {
+function buildWBit(lat, lon) {
     let baseURL = 'https://api.weatherbit.io/v2.0/forecast/daily?';
     let latCord = `lat=${lat}`;
     let lonCord = `&lon=${lon}`;
-    let apiKey = `&key=${process.env.API_KEY}`;
-    let url = baseURL+latCord+lonCord+apiKey;
+    let apiKey = `&key=${process.env.WBIT_API_KEY}`;
+    let url = baseURL + latCord + lonCord + apiKey;
     return url
 }
 
-function getwBitData (data) {
+function getwBitData(data) {
     let geoData = data['postalCodes'][0];
     let latCord = geoData['lat'];
     let lonCord = geoData['lng'];
     let wBitURL = buildWBit(latCord, lonCord);
     return getData(wBitURL)
+}
+
+function buildPix(location) {
+    let baseURL = 'https://pixabay.com/api/?';
+    let apiKey = `key=${process.env.PIX_API_KEY}`;
+    let term = location.replace(/\s/g, '+');
+    let sTerm = `&q=${term}`;
+    console.log(sTerm);
+    let imgType = '&image_type=photo';
+    let url = baseURL + apiKey + sTerm + imgType;
+    console.log(url);
+    return url
+}
+
+function getPixData(location) {
+    let pixURL = buildPix(location);
+    return getData(pixURL)
 }
 
 
@@ -55,24 +72,27 @@ function getwBitData (data) {
 // };
 
 
-function action (e) {
+function action(e) {
     let date = document.getElementById('date').value;
-    getGeoData(e)
-    .then(function (data) {
-        getwBitData (data)
+    let location = document.getElementById('city').value;
+    getPixData(location)
+
+    getGeoData(e, location)
         .then(function (data) {
-            console.log(data);
-            let wBitData = data['data']
-            console.log(wBitData[0]['valid_date'] === date)
-            if (wBitData[0]['valid_date'] === date) {
-                console.log(wBitData[0]);
-            } else {
-                console.log(wBitData);
-            }
-        })
-        // postData('/add', {temperature: tempInFahrenheit(data), date: currentDate(), feelings: feelings});
-        // updateUI()
-    })
+            getwBitData(data)
+                .then(function (data) {
+                    console.log(data);
+                    let wBitData = data['data']
+                    console.log(wBitData[0]['valid_date'] === date)
+                    if (wBitData[0]['valid_date'] === date) {
+                        console.log(wBitData[0]);
+                    } else {
+                        console.log(wBitData);
+                    }
+                })
+            // postData('/add', {temperature: tempInFahrenheit(data), date: currentDate(), feelings: feelings});
+            // updateUI()
+        });
 };
 
 
@@ -84,7 +104,7 @@ const getData = async (url) => {
     try {
         const data = await res.json();
         return data;
-    } catch(error) {
+    } catch (error) {
         console.log('error', error);
     }
 };
@@ -102,7 +122,7 @@ const postData = async (url = '', data = {}) => {
     try {
         const newData = await response.json();
         return newData
-    }catch(error) {
+    } catch (error) {
         console.log('error', error);
     }
 };
@@ -110,14 +130,14 @@ const postData = async (url = '', data = {}) => {
 
 const updateUI = async () => {
     const request = await fetch('/all');
-    try{
-      const allData = await request.json();
-      const latest = allData[allData.length - 1];
-      document.getElementById('date').innerHTML = latest.date;
-      document.getElementById('temp').innerHTML = latest.temperature;
-      document.getElementById('content').innerHTML = latest.userResponse;
-    }catch(error){
-      console.log("error", error);
+    try {
+        const allData = await request.json();
+        const latest = allData[allData.length - 1];
+        document.getElementById('date').innerHTML = latest.date;
+        document.getElementById('temp').innerHTML = latest.temperature;
+        document.getElementById('content').innerHTML = latest.userResponse;
+    } catch (error) {
+        console.log("error", error);
     }
 }
 
