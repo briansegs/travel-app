@@ -7,7 +7,6 @@ function buildGeonames (city, country) {
     let rows = 1;
     let userName = `&username=${process.env.USER_NAME}`;
     let baseURL = 'http://api.geonames.org/postalCodeSearchJSON?';
-    // let postalCode = `&postalcode=${code}`;
     city.replace(/\s/g, '%20');
     let placeName = `&placename=${city}`;
     let countryTag = `&country=${country}`;
@@ -16,12 +15,12 @@ function buildGeonames (city, country) {
     return url
 }
 
-function buildWbit (lat1, lon1) {
+function buildWbit (lat, lon) {
     let baseURL = 'https://api.weatherbit.io/v2.0/forecast/daily?';
-    let lat = `lat=${lat1}`;
-    let lon = `&lon=${lon1}`;
-    let key = `&key=${process.env.API_KEY}`;
-    let url = baseURL+lat+lon+key;
+    let latCord = `lat=${lat}`;
+    let lonCord = `&lon=${lon}`;
+    let apiKey = `&key=${process.env.API_KEY}`;
+    let url = baseURL+latCord+lonCord+apiKey;
     return url
 }
 
