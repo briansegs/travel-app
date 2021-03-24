@@ -77,6 +77,11 @@
   background-color: #ffffff;
   color: rgb(48, 48, 48);
   box-shadow: 0 0 5px #88888875;
+  transition: background-color 0.25s ease;
+    &:hover {
+      background-color: #f7bd77;
+      color: #3f3427;
+    }
 }
 
 
@@ -101,3 +106,4 @@
 #front-splash {
   width: 100%;
 }
+
