@@ -3,12 +3,9 @@ import { getGeoData } from './geoNamesHandler'
 import { addPixToDom } from './pixHandler'
 import { getwBitData } from './wBitHandler'
 import { addWeatherToDom } from './domHandler'
-/* Global Variables */
-
 
 
 // Functions
-
 
 function currentDate () {
     let d = new Date();
@@ -16,6 +13,13 @@ function currentDate () {
     let newDate = d.getFullYear()+'-'+month+'-'+ d.getDate();
     return newDate
 };
+
+
+function removeChildren (parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+}
 
 
 function action(e) {
@@ -34,7 +38,6 @@ function action(e) {
                 })
         });
 };
-
 
 
 // Async Functions
@@ -71,24 +74,27 @@ const postData = async (url = '', data = {}) => {
 const updateUI = async () => {
     const request = await fetch('/all');
     try {
+        let wSection = document.querySelector('.col-12');
         let date = document.getElementById('date').value;
         const allData = await request.json();
         const latest = allData[allData.length - 1];
-
         let wBitData = latest['data'];
+
         console.log(currentDate());
         if (date < wBitData[7]['valid_date'] && date >= currentDate()) {
             console.log('Valid', date);
+            removeChildren(wSection);
             for (let i in wBitData) {
                 if (wBitData[i]['valid_date'] === date) {
-                    addWeatherToDom(wBitData, i);
+                    addWeatherToDom(wBitData, i, wSection);
                 }
             }
         } else {
             console.log('Invalid', date);
+            removeChildren(wSection);
             for (let i in wBitData) {
                 if (i < 7) {
-                    addWeatherToDom(wBitData, i);
+                    addWeatherToDom(wBitData, i, wSection);
                 }
             }
         }
