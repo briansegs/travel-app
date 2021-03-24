@@ -29,6 +29,7 @@ function action(e) {
         .then(function (data) {
             getwBitData(data)
                 .then(function (data) {
+                    console.log(data);
                     let wBitData = data['data']
                     console.log(wBitData)
                     console.log(currentDate())
