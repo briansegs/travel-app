@@ -49,5 +49,4 @@ app.get('/all', (req, res) => {
 app.post('/add', (req, res) => {
     let newData = req.body;
     projectData.push(newData);
-    console.log(newData);
 })
