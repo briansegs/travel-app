@@ -54,8 +54,10 @@
   background-color: rgb(255, 255, 255);
   border:1px solid rgb(255, 255, 255);
   border-radius: 3px;
-  box-shadow: 0 0 5px #888888;
+  box-shadow: 0 0 5px #d4d3def0;
   display: inline-block;
+  margin: 5px;
+
 }
 
 
@@ -72,8 +74,9 @@
 
 .btn-default {
   border: none;
-  background-color: #c5d6e9;
+  background-color: #ffffff;
   color: rgb(48, 48, 48);
+  box-shadow: 0 0 5px #88888875;
 }
 
 
