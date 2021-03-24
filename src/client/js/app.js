@@ -98,7 +98,7 @@ function action(e) {
                     if (date < wBitData[7]['valid_date'] && date >= currentDate()) {
                         console.log('Valid', date);
 
-                        for (const i in wBitData) {
+                        for (let i in wBitData) {
                             if (wBitData[i]['valid_date'] === date) {
                                 let tempInC = wBitData[i]['temp'];
                                 let code = wBitData[i]['weather']['icon'];
@@ -109,7 +109,7 @@ function action(e) {
                                 div.setAttribute('class', 'card');
 
                                 let cardDate = document.createElement('h4');
-                                cardDate.innerHTML = date;
+                                cardDate.innerHTML = wBitData[i]['valid_date'];
                                 div.appendChild(cardDate);
 
                                 let icon = document.createElement('img');
@@ -124,6 +124,31 @@ function action(e) {
                         }
                     } else {
                         console.log('Invalid', date);
+
+                        for (let i in wBitData) {
+                            if (i < 7) {
+                                let tempInC = wBitData[i]['temp'];
+                                let code = wBitData[i]['weather']['icon'];
+
+                                let wSection = document.querySelector('.col-12');
+                                console.log(wSection);
+                                let div = document.createElement('div');
+                                div.setAttribute('class', 'card');
+
+                                let cardDate = document.createElement('h4');
+                                cardDate.innerHTML = wBitData[i]['valid_date'];
+                                div.appendChild(cardDate);
+
+                                let icon = document.createElement('img');
+                                icon.setAttribute('src', `https://www.weatherbit.io/static/img/icons/${code}.png`);
+                                div.appendChild(icon);
+
+                                let cardTemp = document.createElement('h3');
+                                cardTemp.innerHTML = tempInFahrenheit(tempInC)+'°';
+                                div.appendChild(cardTemp);
+                                wSection.appendChild(div);
+                            }
+                        }
                     }
                 })
             // postData('/add', {temperature: tempInFahrenheit(data), date: currentDate(), feelings: feelings});
