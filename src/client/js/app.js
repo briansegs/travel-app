@@ -19,7 +19,6 @@ function currentDate () {
 
 
 function action(e) {
-    let date = document.getElementById('date').value;
     let location = document.getElementById('city').value;
     getPixData(location)
         .then(function (pixData) {
@@ -30,27 +29,9 @@ function action(e) {
             getwBitData(data)
                 .then(function (data) {
                     console.log(data);
-                    let wBitData = data['data']
-                    console.log(wBitData)
-                    console.log(currentDate())
-                    if (date < wBitData[7]['valid_date'] && date >= currentDate()) {
-                        console.log('Valid', date);
-                        for (let i in wBitData) {
-                            if (wBitData[i]['valid_date'] === date) {
-                                addWeatherToDom(wBitData, i);
-                            }
-                        }
-                    } else {
-                        console.log('Invalid', date);
-                        for (let i in wBitData) {
-                            if (i < 7) {
-                                addWeatherToDom(wBitData, i);
-                            }
-                        }
-                    }
+                    postData('/add', {data: data['data']});
+                    updateUI();
                 })
-            // postData('/add', {temperature: tempInFahrenheit(data), date: currentDate(), feelings: feelings});
-            // updateUI()
         });
 };
 
@@ -90,11 +71,27 @@ const postData = async (url = '', data = {}) => {
 const updateUI = async () => {
     const request = await fetch('/all');
     try {
+        let date = document.getElementById('date').value;
         const allData = await request.json();
         const latest = allData[allData.length - 1];
-        document.getElementById('date').innerHTML = latest.date;
-        document.getElementById('temp').innerHTML = latest.temperature;
-        document.getElementById('content').innerHTML = latest.userResponse;
+
+        let wBitData = latest['data'];
+        console.log(currentDate());
+        if (date < wBitData[7]['valid_date'] && date >= currentDate()) {
+            console.log('Valid', date);
+            for (let i in wBitData) {
+                if (wBitData[i]['valid_date'] === date) {
+                    addWeatherToDom(wBitData, i);
+                }
+            }
+        } else {
+            console.log('Invalid', date);
+            for (let i in wBitData) {
+                if (i < 7) {
+                    addWeatherToDom(wBitData, i);
+                }
+            }
+        }
     } catch (error) {
         console.log("error", error);
     }
