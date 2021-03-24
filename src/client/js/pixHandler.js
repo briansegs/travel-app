@@ -1,5 +1,6 @@
 import { getData } from './app'
 
+
 function buildPix(location) {
     let baseURL = 'https://pixabay.com/api/?';
     let apiKey = `key=${process.env.PIX_API_KEY}`;
@@ -10,10 +11,12 @@ function buildPix(location) {
     return url
 }
 
+
 function getPixData(location) {
     let pixURL = buildPix(location);
     return getData(pixURL)
 }
+
 
 function addPixToDom (pixData) {
     let pixLst = pixData['hits'];
@@ -22,6 +25,7 @@ function addPixToDom (pixData) {
     let locationImg = document.getElementById('front-splash');
     locationImg.setAttribute('src', randImg);
 }
+
 
 export { getPixData }
 export { addPixToDom }

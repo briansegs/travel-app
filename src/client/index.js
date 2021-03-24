@@ -6,7 +6,10 @@ import './styles/nav.scss'
 import './styles/responsive.scss'
 import './styles/main.scss'
 
+
 creatOptions();
 
+
 // EventListeners
+
 document.getElementById('generate').addEventListener('click', action);

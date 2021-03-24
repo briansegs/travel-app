@@ -1,5 +1,6 @@
 import { getData } from './app'
 
+
 function buildWBit(lat, lon) {
     let baseURL = 'https://api.weatherbit.io/v2.0/forecast/daily?';
     let latCord = `lat=${lat}`;
@@ -9,6 +10,7 @@ function buildWBit(lat, lon) {
     return url
 }
 
+
 function getwBitData(data) {
     let geoData = data['postalCodes'][0];
     let latCord = geoData['lat'];
@@ -16,5 +18,6 @@ function getwBitData(data) {
     let wBitURL = buildWBit(latCord, lonCord);
     return getData(wBitURL)
 }
+
 
 export { getwBitData }

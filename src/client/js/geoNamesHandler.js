@@ -1,11 +1,13 @@
 import { getData } from './app'
 
+
 function getGeoData(e, location) {
     let city = location;
     let country = document.getElementById('country').value;
     let geoURL = buildGeo(city, country);
     return getData(geoURL)
 }
+
 
 function buildGeo(city, country) {
     let rows = 1;
@@ -18,5 +20,6 @@ function buildGeo(city, country) {
     let url = baseURL + placeName + countryTag + maxRows + userName;
     return url
 }
+
 
 export { getGeoData }
