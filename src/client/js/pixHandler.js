@@ -5,10 +5,8 @@ function buildPix(location) {
     let apiKey = `key=${process.env.PIX_API_KEY}`;
     let term = location.replace(/\s/g, '+');
     let sTerm = `&q=${term}`;
-    console.log(sTerm);
     let imgType = '&image_type=photo';
     let url = baseURL + apiKey + sTerm + imgType;
-    console.log(url);
     return url
 }
 

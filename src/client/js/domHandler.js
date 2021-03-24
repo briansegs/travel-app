@@ -9,7 +9,7 @@ function addWeatherToDom (wBitData, i) {
     let code = wBitData[i]['weather']['icon'];
 
     let wSection = document.querySelector('.col-12');
-    console.log(wSection);
+
     let div = document.createElement('div');
     div.setAttribute('class', 'card');
 
