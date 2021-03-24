@@ -48,11 +48,6 @@ app.get('/all', (req, res) => {
 // POST Data
 app.post('/add', (req, res) => {
     let newData = req.body;
-    let newEntry = {
-        temperature: newData.temperature,
-        date: newData.date,
-        userResponse: newData.feelings
-    };
-    projectData.push(newEntry);
-    console.log(projectData);
+    projectData.push(newData);
+    console.log(newData);
 })
