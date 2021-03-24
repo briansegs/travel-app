@@ -4,11 +4,9 @@ function tempInFahrenheit (tempInC) {
 };
 
 
-function addWeatherToDom (wBitData, i) {
+function addWeatherToDom (wBitData, i, wSection) {
     let tempInC = wBitData[i]['temp'];
     let code = wBitData[i]['weather']['icon'];
-
-    let wSection = document.querySelector('.col-12');
 
     let div = document.createElement('div');
     div.setAttribute('class', 'card');
@@ -26,5 +24,6 @@ function addWeatherToDom (wBitData, i) {
     div.appendChild(cardTemp);
     wSection.appendChild(div);
 }
+
 
 export { addWeatherToDom }
