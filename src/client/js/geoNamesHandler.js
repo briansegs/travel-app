@@ -1,3 +1,5 @@
+import { getData } from './app'
+
 function getGeoData(e, location) {
     let city = location;
     let country = document.getElementById('country').value;

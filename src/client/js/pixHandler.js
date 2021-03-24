@@ -1,3 +1,5 @@
+import { getData } from './app'
+
 function buildPix(location) {
     let baseURL = 'https://pixabay.com/api/?';
     let apiKey = `key=${process.env.PIX_API_KEY}`;
@@ -23,4 +25,5 @@ function addPixToDom (pixData) {
     locationImg.setAttribute('src', randImg);
 }
 
-export { getPixData, addPixToDom }
+export { getPixData }
+export { addPixToDom }

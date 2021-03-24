@@ -1,3 +1,5 @@
+import { getData } from './app'
+
 function buildWBit(lat, lon) {
     let baseURL = 'https://api.weatherbit.io/v2.0/forecast/daily?';
     let latCord = `lat=${lat}`;
