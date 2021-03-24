@@ -67,11 +67,12 @@ function addPixToDom (pixData) {
 }
 
 
-// function currentDate () {
-//     let d = new Date();
-//     let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
-//     return newDate
-// };
+function currentDate () {
+    let d = new Date();
+    let month = ("0" + (d.getMonth() + 1)).slice(-2);
+    let newDate = d.getFullYear()+'-'+month+'-'+ d.getDate();
+    return newDate
+};
 
 
 // function tempInFahrenheit (data) {
@@ -93,11 +94,12 @@ function action(e) {
                 .then(function (data) {
                     console.log(data);
                     let wBitData = data['data']
-                    console.log(wBitData[0]['valid_date'] === date)
-                    if (wBitData[0]['valid_date'] === date) {
-                        console.log(wBitData[0]);
+                    console.log(currentDate() === date)
+                    console.log(currentDate())
+                    if (date < wBitData[7]['valid_date'] && date >= currentDate()) {
+                        console.log('Valid', date);
                     } else {
-                        console.log(wBitData);
+                        console.log('Invalid', date);
                     }
                 })
             // postData('/add', {temperature: tempInFahrenheit(data), date: currentDate(), feelings: feelings});
