@@ -3,69 +3,6 @@
 
 
 // Functions
-function getGeoData(e, location) {
-    let city = location;
-    let country = document.getElementById('country').value;
-    let geoURL = buildGeonames(city, country);
-    return getData(geoURL)
-}
-
-function buildGeonames(city, country) {
-    let rows = 1;
-    let userName = `&username=${process.env.USER_NAME}`;
-    let baseURL = 'http://api.geonames.org/postalCodeSearchJSON?';
-    city.replace(/\s/g, '%20');
-    let placeName = `&placename=${city}`;
-    let countryTag = `&country=${country}`;
-    let maxRows = `&maxRows=${rows}`;
-    let url = baseURL + placeName + countryTag + maxRows + userName;
-    return url
-}
-
-
-
-function buildWBit(lat, lon) {
-    let baseURL = 'https://api.weatherbit.io/v2.0/forecast/daily?';
-    let latCord = `lat=${lat}`;
-    let lonCord = `&lon=${lon}`;
-    let apiKey = `&key=${process.env.WBIT_API_KEY}`;
-    let url = baseURL + latCord + lonCord + apiKey;
-    return url
-}
-
-function getwBitData(data) {
-    let geoData = data['postalCodes'][0];
-    let latCord = geoData['lat'];
-    let lonCord = geoData['lng'];
-    let wBitURL = buildWBit(latCord, lonCord);
-    return getData(wBitURL)
-}
-
-function buildPix(location) {
-    let baseURL = 'https://pixabay.com/api/?';
-    let apiKey = `key=${process.env.PIX_API_KEY}`;
-    let term = location.replace(/\s/g, '+');
-    let sTerm = `&q=${term}`;
-    console.log(sTerm);
-    let imgType = '&image_type=photo';
-    let url = baseURL + apiKey + sTerm + imgType;
-    console.log(url);
-    return url
-}
-
-function getPixData(location) {
-    let pixURL = buildPix(location);
-    return getData(pixURL)
-}
-
-function addPixToDom (pixData) {
-    let pixLst = pixData['hits'];
-    let randIndex = Math.floor(Math.random() * pixLst.length);
-    let randImg = pixLst[randIndex]['webformatURL'];
-    let locationImg = document.getElementById('front-splash');
-    locationImg.setAttribute('src', randImg);
-}
-
 
 function currentDate () {
     let d = new Date();
