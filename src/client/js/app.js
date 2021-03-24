@@ -1,8 +1,35 @@
+import { getPixData } from './pixHandler'
+import { getGeoData } from './geoNamesHandler'
+import { addPixToDom } from './pixHandler'
+import { getwBitData } from './wBitHandler'
 /* Global Variables */
 
 
 
 // Functions
+function addWeatherToDom (wBitData, i) {
+    let tempInC = wBitData[i]['temp'];
+    let code = wBitData[i]['weather']['icon'];
+
+    let wSection = document.querySelector('.col-12');
+    console.log(wSection);
+    let div = document.createElement('div');
+    div.setAttribute('class', 'card');
+
+    let cardDate = document.createElement('h4');
+    cardDate.innerHTML = wBitData[i]['valid_date'];
+    div.appendChild(cardDate);
+
+    let icon = document.createElement('img');
+    icon.setAttribute('src', `https://www.weatherbit.io/static/img/icons/${code}.png`);
+    div.appendChild(icon);
+
+    let cardTemp = document.createElement('h3');
+    cardTemp.innerHTML = tempInFahrenheit(tempInC)+'°';
+    div.appendChild(cardTemp);
+    wSection.appendChild(div);
+}
+
 
 function currentDate () {
     let d = new Date();
@@ -34,56 +61,16 @@ function action(e) {
                     console.log(currentDate())
                     if (date < wBitData[7]['valid_date'] && date >= currentDate()) {
                         console.log('Valid', date);
-
                         for (let i in wBitData) {
                             if (wBitData[i]['valid_date'] === date) {
-                                let tempInC = wBitData[i]['temp'];
-                                let code = wBitData[i]['weather']['icon'];
-
-                                let wSection = document.querySelector('.col-12');
-                                console.log(wSection);
-                                let div = document.createElement('div');
-                                div.setAttribute('class', 'card');
-
-                                let cardDate = document.createElement('h4');
-                                cardDate.innerHTML = wBitData[i]['valid_date'];
-                                div.appendChild(cardDate);
-
-                                let icon = document.createElement('img');
-                                icon.setAttribute('src', `https://www.weatherbit.io/static/img/icons/${code}.png`);
-                                div.appendChild(icon);
-
-                                let cardTemp = document.createElement('h3');
-                                cardTemp.innerHTML = tempInFahrenheit(tempInC)+'°';
-                                div.appendChild(cardTemp);
-                                wSection.appendChild(div);
+                                addWeatherToDom(wBitData, i);
                             }
                         }
                     } else {
                         console.log('Invalid', date);
-
                         for (let i in wBitData) {
                             if (i < 7) {
-                                let tempInC = wBitData[i]['temp'];
-                                let code = wBitData[i]['weather']['icon'];
-
-                                let wSection = document.querySelector('.col-12');
-                                console.log(wSection);
-                                let div = document.createElement('div');
-                                div.setAttribute('class', 'card');
-
-                                let cardDate = document.createElement('h4');
-                                cardDate.innerHTML = wBitData[i]['valid_date'];
-                                div.appendChild(cardDate);
-
-                                let icon = document.createElement('img');
-                                icon.setAttribute('src', `https://www.weatherbit.io/static/img/icons/${code}.png`);
-                                div.appendChild(icon);
-
-                                let cardTemp = document.createElement('h3');
-                                cardTemp.innerHTML = tempInFahrenheit(tempInC)+'°';
-                                div.appendChild(cardTemp);
-                                wSection.appendChild(div);
+                                addWeatherToDom(wBitData, i);
                             }
                         }
                     }
@@ -141,3 +128,4 @@ const updateUI = async () => {
 
 
 export { action }
+export { getData }
