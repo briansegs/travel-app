@@ -48,6 +48,12 @@
 	}
 }
 
+@media (min-width: 768px) {
+	.col-12 {
+    width: 100%;
+		float: left;
+	}
+}
 
 @media (min-width: 768px) {
   .lead {
