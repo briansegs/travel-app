@@ -75,10 +75,10 @@ function currentDate () {
 };
 
 
-// function tempInFahrenheit (data) {
-//     let temp = (data.main.temp - 273.15) * 1.8 + 32;
-//     return temp.toFixed(2)
-// };
+function tempInFahrenheit (tempInC) {
+    let tempInF = tempInC * 1.8 + 32;
+    return tempInF.toFixed(0)
+};
 
 
 function action(e) {
@@ -92,12 +92,36 @@ function action(e) {
         .then(function (data) {
             getwBitData(data)
                 .then(function (data) {
-                    console.log(data);
                     let wBitData = data['data']
-                    console.log(currentDate() === date)
+                    console.log(wBitData)
                     console.log(currentDate())
                     if (date < wBitData[7]['valid_date'] && date >= currentDate()) {
                         console.log('Valid', date);
+
+                        for (const i in wBitData) {
+                            if (wBitData[i]['valid_date'] === date) {
+                                let tempInC = wBitData[i]['temp'];
+                                let code = wBitData[i]['weather']['icon'];
+
+                                let wSection = document.querySelector('.col-12');
+                                console.log(wSection);
+                                let div = document.createElement('div');
+                                div.setAttribute('class', 'card');
+
+                                let cardDate = document.createElement('h4');
+                                cardDate.innerHTML = date;
+                                div.appendChild(cardDate);
+
+                                let icon = document.createElement('img');
+                                icon.setAttribute('src', `https://www.weatherbit.io/static/img/icons/${code}.png`);
+                                div.appendChild(icon);
+
+                                let cardTemp = document.createElement('h3');
+                                cardTemp.innerHTML = tempInFahrenheit(tempInC)+'°';
+                                div.appendChild(cardTemp);
+                                wSection.appendChild(div);
+                            }
+                        }
                     } else {
                         console.log('Invalid', date);
                     }
