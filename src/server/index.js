@@ -35,7 +35,8 @@ app.listen(port, function () {
     console.log(`Travel app listening on port ${port}!`)
 })
 
-// Routes
+
+/* Routes */
 
 // GET All
 let projectData = [];
