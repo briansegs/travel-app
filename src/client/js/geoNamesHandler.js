@@ -4,8 +4,13 @@ import { getData } from './app'
 function getGeoData(e, location) {
     let city = location;
     let country = document.getElementById('country').value;
-    let geoURL = buildGeo(city, country);
-    return getData(geoURL)
+    if (country === '') {
+        alert('Country is missing.')
+    } else {
+        let geoURL = buildGeo(city, country);
+        return getData(geoURL)
+    }
+
 }
 
 

@@ -12,7 +12,7 @@ function currentDate () {
     let month = ("0" + (d.getMonth() + 1)).slice(-2);
     let newDate = d.getFullYear()+'-'+month+'-'+ d.getDate();
     return newDate
-};
+}
 
 
 function removeChildren (parent) {
@@ -24,20 +24,24 @@ function removeChildren (parent) {
 
 function action(e) {
     let location = document.getElementById('city').value;
-    getPixData(location)
-        .then(function (pixData) {
-            addPixToDom(pixData);
-        });
-    getGeoData(e, location)
-        .then(function (data) {
-            getwBitData(data)
-                .then(function (data) {
-                    console.log(data);
-                    postData('/add', {data: data['data']});
-                    updateUI();
-                })
-        });
-};
+    if (location === '') {
+        alert('City is missing');
+    } else {
+        getPixData(location)
+            .then(function (pixData) {
+                addPixToDom(pixData);
+            });
+        getGeoData(e, location)
+            .then(function (data) {
+                getwBitData(data)
+                    .then(function (data) {
+                        console.log(data);
+                        postData('/add', {data: data['data']});
+                        updateUI();
+                    });
+            });
+    }
+}
 
 
 // Async Functions
