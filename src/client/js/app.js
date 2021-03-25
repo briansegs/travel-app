@@ -84,9 +84,7 @@ const updateUI = async () => {
         const latest = allData[allData.length - 1];
         let wBitData = latest['data'];
 
-        console.log(currentDate());
         if (date < wBitData[7]['valid_date'] && date >= currentDate()) {
-            console.log('Valid', date);
             removeChildren(wSection);
             for (let i in wBitData) {
                 if (wBitData[i]['valid_date'] === date) {
@@ -94,7 +92,6 @@ const updateUI = async () => {
                 }
             }
         } else {
-            console.log('Invalid', date);
             removeChildren(wSection);
             for (let i in wBitData) {
                 if (i < 7) {
