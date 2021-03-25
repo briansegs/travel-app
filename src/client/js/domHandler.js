@@ -3,7 +3,10 @@ function tempInFahrenheit (tempInC) {
     return tempInF.toFixed(0)
 };
 
-
+/**
+ * Builds a div with weather data
+ * Adds div to DOM
+ */
 function addWeatherToDom (wBitData, index, weatherSec) {
     let tempInC = wBitData[index]['temp'];
     let code = wBitData[index]['weather']['icon'];
