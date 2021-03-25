@@ -4,15 +4,15 @@ function tempInFahrenheit (tempInC) {
 };
 
 
-function addWeatherToDom (wBitData, i, wSection) {
-    let tempInC = wBitData[i]['temp'];
-    let code = wBitData[i]['weather']['icon'];
+function addWeatherToDom (wBitData, index, wSection) {
+    let tempInC = wBitData[index]['temp'];
+    let code = wBitData[index]['weather']['icon'];
 
     let div = document.createElement('div');
     div.setAttribute('class', 'card');
 
     let cardDate = document.createElement('h4');
-    cardDate.innerHTML = wBitData[i]['valid_date'];
+    cardDate.innerHTML = wBitData[index]['valid_date'];
     div.appendChild(cardDate);
 
     let icon = document.createElement('img');

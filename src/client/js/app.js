@@ -86,16 +86,16 @@ const updateUI = async () => {
 
         if (date < wBitData[7]['valid_date'] && date >= currentDate()) {
             removeChildren(wSection);
-            for (let i in wBitData) {
-                if (wBitData[i]['valid_date'] === date) {
-                    addWeatherToDom(wBitData, i, wSection);
+            for (let index in wBitData) {
+                if (wBitData[index]['valid_date'] === date) {
+                    addWeatherToDom(wBitData, index, wSection);
                 }
             }
         } else {
             removeChildren(wSection);
-            for (let i in wBitData) {
-                if (i < 7) {
-                    addWeatherToDom(wBitData, i, wSection);
+            for (let index in wBitData) {
+                if (index < 7) {
+                    addWeatherToDom(wBitData, index, wSection);
                 }
             }
         }
