@@ -35,7 +35,6 @@ function action(e) {
             .then(function (data) {
                 getwBitData(data)
                     .then(function (data) {
-                        console.log(data);
                         postData('/add', {data: data['data']});
                         updateUI();
                     });
