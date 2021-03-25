@@ -50,3 +50,6 @@ app.post('/add', (req, res) => {
     let newData = req.body;
     projectData.push(newData);
 })
+
+
+export default app;
