@@ -8,7 +8,6 @@ dotenv.config();
 // Start up an instance of app
 const app = express();
 
-
 // to use json
 app.use(express.json())
 
@@ -33,7 +32,7 @@ app.get('/', function (req, res) {
 const port = 8081;
 
 app.listen(port, function () {
-    console.log(`Example app listening on port ${port}!`)
+    console.log(`Travel app listening on port ${port}!`)
 })
 
 // Routes
