@@ -1,4 +1,4 @@
-Travel app
+# Travel app
 
 ## Introduction
 Travel app is an aid to help you plan your next adventure anywhere in the world. This app will obtain a desired trip location & date from the user, and displays weather and an image of the location using information obtained from external APIs.
