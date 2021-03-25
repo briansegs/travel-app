@@ -78,24 +78,24 @@ const postData = async (url = '', data = {}) => {
 const updateUI = async () => {
     const request = await fetch('/all');
     try {
-        let wSection = document.querySelector('.col-12');
+        let weatherSec = document.querySelector('.col-12');
         let date = document.getElementById('date').value;
         const allData = await request.json();
         const latest = allData[allData.length - 1];
         let wBitData = latest['data'];
 
         if (date < wBitData[7]['valid_date'] && date >= currentDate()) {
-            removeChildren(wSection);
+            removeChildren(weatherSec);
             for (let index in wBitData) {
                 if (wBitData[index]['valid_date'] === date) {
-                    addWeatherToDom(wBitData, index, wSection);
+                    addWeatherToDom(wBitData, index, weatherSec);
                 }
             }
         } else {
-            removeChildren(wSection);
+            removeChildren(weatherSec);
             for (let index in wBitData) {
                 if (index < 7) {
-                    addWeatherToDom(wBitData, index, wSection);
+                    addWeatherToDom(wBitData, index, weatherSec);
                 }
             }
         }
