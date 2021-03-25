@@ -78,7 +78,7 @@ const postData = async (url = '', data = {}) => {
 const updateUI = async () => {
     const request = await fetch('/all');
     try {
-        let weatherSec = document.querySelector('.col-12');
+        let weatherSec = document.querySelector('.col-full');
         let date = document.getElementById('date').value;
         const allData = await request.json();
         const latest = allData[allData.length - 1];
