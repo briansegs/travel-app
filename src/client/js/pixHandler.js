@@ -5,9 +5,9 @@ function buildPix(location) {
     let baseURL = 'https://pixabay.com/api/?';
     let apiKey = `key=${process.env.PIX_API_KEY}`;
     let term = location.replace(/\s/g, '+');
-    let sTerm = `&q=${term}`;
+    let searchTerm = `&q=${term}`;
     let imgType = '&image_type=photo';
-    let url = baseURL + apiKey + sTerm + imgType;
+    let url = baseURL + apiKey + searchTerm + imgType;
     return url
 }
 
