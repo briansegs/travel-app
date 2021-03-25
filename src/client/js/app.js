@@ -22,6 +22,15 @@ function removeChildren (parent) {
 }
 
 
+/**
+ * @param {DOM-event} e
+ * Gets the city, country, and date from form fields
+ * Alerts if fields are empty
+ * Gets and post images from an api
+ * Gets and uses data from an api to get data from another api
+ * Posts data to the server
+ * Updats the UI with data stored in the server
+ */
 function action(e) {
     let location = document.getElementById('city').value;
     if (location === '') {
@@ -74,6 +83,13 @@ const postData = async (url = '', data = {}) => {
 };
 
 
+/**
+ * Gets latest data from the server
+ * Checks if date in data within 7 days from current date
+ * Clears the DOM section of all children
+ * Either posts a group of elements to the section or a single one
+ * Sends an error if anything fails
+ */
 const updateUI = async () => {
     const request = await fetch('/all');
     try {
