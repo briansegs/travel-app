@@ -2,7 +2,7 @@ var path = require('path')
 const express = require('express')
 var cors = require('cors')
 const dotenv = require('dotenv');
-dotenv.config();
+dotenv.config({ silent: process.env.NODE_ENV === 'production' });
 
 
 // Start up an instance of app
