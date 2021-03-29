@@ -24,8 +24,9 @@ const { Router, response } = require('express');
 app.use(express.static('dist'))
 
 // Sets landing page
+const appRoot = '../../dist/index.html';
 app.get('/', function (req, res) {
-    res.sendFile(__dirname + '../../dist/index.html')
+    res.sendFile(__dirname + appRoot)
 })
 
 // designates what port the app will listen to for incoming requests
