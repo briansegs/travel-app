@@ -29,7 +29,7 @@ app.get('/', function (req, res) {
 })
 
 // designates what port the app will listen to for incoming requests
-const port = 8081;
+const port = process.env.PORT || 8081;
 
 app.listen(port, function () {
     console.log(`Travel app listening on port ${port}!`)
