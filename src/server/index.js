@@ -21,11 +21,11 @@ app.use(cors())
 const { Router, response } = require('express');
 
 // Initialize the main project folder
-app.use(express.static(__dirname + 'dist'))
+app.use(express.static(__dirname + '/dist'))
 
 // Sets landing page
 app.get('/', function (req, res) {
-    res.sendFile('./index.html')
+    res.sendFile(__dirname + '/dist/index.html')
 })
 
 // designates what port the app will listen to for incoming requests
