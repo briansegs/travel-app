@@ -1,8 +1,9 @@
 var path = require('path')
 const express = require('express')
 var cors = require('cors')
-// const dotenv = require('dotenv');
-// dotenv.config();
+
+if (process.env.NODE_ENV == 'development')
+require('dotenv').config({ silent: true });
 
 
 // Start up an instance of app
@@ -25,7 +26,7 @@ app.use(express.static('dist'))
 
 // Sets landing page
 app.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname,  '../../dist/', 'index.html'))
+    res.sendFile(path.join(__dirname, '../../dist/', 'index.html'))
 })
 
 // designates what port the app will listen to for incoming requests
