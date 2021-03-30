@@ -19,7 +19,7 @@ function getPixData(location) {
 
 
 function addPixToDom (pixData) {
-    let pixLst = pixData['hits'];
+    let pixLst = pixData['json']['hits'];
     let randIndex = Math.floor(Math.random() * pixLst.length);
     let randImg = pixLst[randIndex]['webformatURL'];
     let locationImg = document.getElementById('front-splash');

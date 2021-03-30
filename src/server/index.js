@@ -1,6 +1,7 @@
 var path = require('path')
 const express = require('express')
 var cors = require('cors')
+const fetch = require('node-fetch')
 
 if (process.env.NODE_ENV == 'development')
 require('dotenv').config({ silent: true });
@@ -74,17 +75,18 @@ app.post('/add', (req, res) => {
     projectData.push(newData);
 })
 
-app.get('/getpix', async (req, res) => {
+// POST pixData
+app.post('/getpix', async (req, res) => {
     try {
         let location = req.body.data;
         let pixURL = buildPix(location);
         let response = getData(pixURL);
-        let json = await response.json();
-        return res.json({
-            success: true,
-            json,
-        });
-
+        response.then(function (json) {
+            return res.json({
+                success: true,
+                json,
+            });
+        })
     } catch (err) {
         return res.status(500).json({
           success: false,

@@ -36,17 +36,17 @@ function action(e) {
     if (location === '') {
         alert('City is missing');
     } else {
-        postPix({data: location})
-            // .then(function (pixData) {
-            //     if (pixData['hits'].length === 0) {
-            //         getPixData('not found')
-            //             .then (function (na) {
-            //                 addPixToDom(na);
-            //             })
-            //     } else {
-            //         addPixToDom(pixData);
-            //     }
-            // });
+        postPix('/getpix', {data: location})
+            .then(function (pixData) {
+                if (pixData['json']['hits'].length === 0) {
+                    postPix('/getpix', {data: 'not found'})
+                        .then (function (na) {
+                            addPixToDom(na);
+                        })
+                } else {
+                    addPixToDom(pixData);
+                }
+            });
         getGeoData(e, location)
             .then(function (data) {
                 let date = document.getElementById('date').value;
@@ -97,7 +97,7 @@ const postData = async (url = '', data = {}) => {
 };
 
 
-const postPix = async (url = '/getpix', data = {}) => {
+const postPix = async (url = '', data = {}) => {
     const response = await fetch(url, {
         method: 'POST',
         credentials: 'same-origin',
