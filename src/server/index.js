@@ -61,6 +61,15 @@ function buildGeo(city, country) {
     return url
 }
 
+function buildWBit(lat, lon) {
+    let baseURL = 'https://api.weatherbit.io/v2.0/forecast/daily?';
+    let latCord = `lat=${lat}`;
+    let lonCord = `&lon=${lon}`;
+    let apiKey = `&key=${process.env.WBIT_API_KEY}`;
+    let url = baseURL + latCord + lonCord + apiKey;
+    return url
+}
+
 const getData = async (url) => {
     const res = await fetch(url)
     try {
@@ -108,13 +117,36 @@ app.post('/getpix', async (req, res) => {
 })
 
 // POST geoData
-
 app.post('/getgeo', async (req, res) => {
     try {
         let city = req.body.location;
         let country = req.body.country;
         let geoURL = buildGeo(city, country)
         let response = getData(geoURL);
+        response.then(function (json) {
+            return res.json({
+                success: true,
+                json,
+            });
+        })
+    } catch (err) {
+        return res.status(500).json({
+          success: false,
+          message: err.message,
+        });
+    }
+})
+
+
+// POST wBitData
+app.post('/getwbit', async (req, res) => {
+    try {
+        let data = req.body.data;
+        let geoData = data['postalCodes'][0];
+        let latCord = geoData['lat'];
+        let lonCord = geoData['lng'];
+        let wBitURL = buildWBit(latCord, lonCord);
+        let response = getData(wBitURL);
         response.then(function (json) {
             return res.json({
                 success: true,

@@ -1,7 +1,4 @@
-import { getPixData } from './pixHandler'
-import { getGeoData } from './geoNamesHandler'
 import { addPixToDom } from './pixHandler'
-import { getwBitData } from './wBitHandler'
 import { addWeatherToDom } from './domHandler'
 
 
@@ -50,19 +47,17 @@ function action(e) {
             });
         postData('/getgeo', {location: location, country: country})
             .then(function (data) {
-                console.log(data);
+                let newData = data['json'];
                 let date = document.getElementById('date').value;
                 if (date === '') {
                     alert('Date is missing.')
                 } else {
-                    getwBitData(data)
+                    postData('/getwbit', {data: newData})
                         .then(function (data) {
-                            postData('/add', {data: data['data']});
+                            postData('/add', {data: data['json']['data']});
                             updateUI(date);
                         });
                 }
-
-
             });
     }
 }
