@@ -42,29 +42,29 @@ app.listen(port, function () {
 function buildPix(location) {
     let baseURL = 'https://pixabay.com/api/?';
     let apiKey = `key=${process.env.PIX_API_KEY}`;
-    let term = location.replace(/\s/g, '+');
-    let searchTerm = `&q=${term}`;
-    let imgType = '&image_type=photo';
+    const term = location.replace(/\s/g, '+');
+    const searchTerm = `&q=${term}`;
+    const imgType = '&image_type=photo';
     let url = baseURL + apiKey + searchTerm + imgType;
     return url
 }
 
 function buildGeo(city, country) {
-    let rows = 1;
-    let userName = `&username=${process.env.USER_NAME}`;
+    const rows = 1;
+    const userName = `&username=${process.env.USER_NAME}`;
     let baseURL = 'http://api.geonames.org/postalCodeSearchJSON?';
     city.replace(/\s/g, '%20');
-    let placeName = `&placename=${city}`;
-    let countryTag = `&country=${country}`;
-    let maxRows = `&maxRows=${rows}`;
+    const placeName = `&placename=${city}`;
+    const countryTag = `&country=${country}`;
+    const maxRows = `&maxRows=${rows}`;
     let url = baseURL + placeName + countryTag + maxRows + userName;
     return url
 }
 
 function buildWBit(lat, lon) {
     let baseURL = 'https://api.weatherbit.io/v2.0/forecast/daily?';
-    let latCord = `lat=${lat}`;
-    let lonCord = `&lon=${lon}`;
+    const latCord = `lat=${lat}`;
+    const lonCord = `&lon=${lon}`;
     let apiKey = `&key=${process.env.WBIT_API_KEY}`;
     let url = baseURL + latCord + lonCord + apiKey;
     return url
@@ -93,7 +93,7 @@ app.get('/all', (req, res) => {
 // POST Data
 app.post('/add', (req, res) => {
     try{
-        let newData = req.body;
+        const newData = req.body;
         projectData.push(newData);
         return res.json({
             success: true,
@@ -111,8 +111,8 @@ app.post('/add', (req, res) => {
 // POST pixData
 app.post('/getpix', async (req, res) => {
     try {
-        let location = req.body.data;
-        let pixURL = buildPix(location);
+        const location = req.body.data;
+        const pixURL = buildPix(location);
         let response = getData(pixURL);
         response.then(function (json) {
             return res.json({
@@ -131,9 +131,9 @@ app.post('/getpix', async (req, res) => {
 // POST geoData
 app.post('/getgeo', async (req, res) => {
     try {
-        let city = req.body.location;
-        let country = req.body.country;
-        let geoURL = buildGeo(city, country)
+        const city = req.body.location;
+        const country = req.body.country;
+        const geoURL = buildGeo(city, country)
         let response = getData(geoURL);
         response.then(function (json) {
             return res.json({
@@ -153,11 +153,11 @@ app.post('/getgeo', async (req, res) => {
 // POST wBitData
 app.post('/getwbit', async (req, res) => {
     try {
-        let data = req.body.data;
-        let geoData = data['postalCodes'][0];
-        let latCord = geoData['lat'];
-        let lonCord = geoData['lng'];
-        let wBitURL = buildWBit(latCord, lonCord);
+        const data = req.body.data;
+        const geoData = data['postalCodes'][0];
+        const latCord = geoData['lat'];
+        const lonCord = geoData['lng'];
+        const wBitURL = buildWBit(latCord, lonCord);
         let response = getData(wBitURL);
         response.then(function (json) {
             return res.json({
