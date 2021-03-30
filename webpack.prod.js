@@ -42,7 +42,9 @@ module.exports = {
             skipWaiting: true
         }),
         new webpack.DefinePlugin({
-            "process.env": {},
-          }),
+            PIX_API_KEY: JSON.stringify(process.env.PIX_API_KEY),
+            USER_NAME: JSON.stringify(process.env.USER_NAME),
+            WBIT_API_KEY: JSON.stringify(process.env.WBIT_API_KEY)
+        }),
     ]
 }
