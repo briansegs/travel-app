@@ -49,6 +49,18 @@ function buildPix(location) {
     return url
 }
 
+function buildGeo(city, country) {
+    let rows = 1;
+    let userName = `&username=${process.env.USER_NAME}`;
+    let baseURL = 'http://api.geonames.org/postalCodeSearchJSON?';
+    city.replace(/\s/g, '%20');
+    let placeName = `&placename=${city}`;
+    let countryTag = `&country=${country}`;
+    let maxRows = `&maxRows=${rows}`;
+    let url = baseURL + placeName + countryTag + maxRows + userName;
+    return url
+}
+
 const getData = async (url) => {
     const res = await fetch(url)
     try {
@@ -95,5 +107,26 @@ app.post('/getpix', async (req, res) => {
     }
 })
 
+// POST geoData
+
+app.post('/getgeo', async (req, res) => {
+    try {
+        let city = req.body.location;
+        let country = req.body.country;
+        let geoURL = buildGeo(city, country)
+        let response = getData(geoURL);
+        response.then(function (json) {
+            return res.json({
+                success: true,
+                json,
+            });
+        })
+    } catch (err) {
+        return res.status(500).json({
+          success: false,
+          message: err.message,
+        });
+    }
+})
 
 module.exports = app;

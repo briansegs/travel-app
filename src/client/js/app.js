@@ -33,13 +33,14 @@ function removeChildren (parent) {
  */
 function action(e) {
     let location = document.getElementById('city').value;
-    if (location === '') {
-        alert('City is missing');
+    let country = document.getElementById('country').value;
+    if (location === '' || country === '') {
+        alert('city or country is missing');
     } else {
-        postPix('/getpix', {data: location})
+        postData('/getpix', {data: location})
             .then(function (pixData) {
                 if (pixData['json']['hits'].length === 0) {
-                    postPix('/getpix', {data: 'not found'})
+                    postData('/getpix', {data: 'not found'})
                         .then (function (na) {
                             addPixToDom(na);
                         })
@@ -47,8 +48,9 @@ function action(e) {
                     addPixToDom(pixData);
                 }
             });
-        getGeoData(e, location)
+        postData('/getgeo', {location: location, country: country})
             .then(function (data) {
+                console.log(data);
                 let date = document.getElementById('date').value;
                 if (date === '') {
                     alert('Date is missing.')
@@ -96,23 +98,6 @@ const postData = async (url = '', data = {}) => {
     }
 };
 
-
-const postPix = async (url = '', data = {}) => {
-    const response = await fetch(url, {
-        method: 'POST',
-        credentials: 'same-origin',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-    })
-    try {
-        const newData = await response.json();
-        return newData
-    } catch (error) {
-        console.log('error', error);
-    }
-};
 
 /**
  * Gets latest data from the server
