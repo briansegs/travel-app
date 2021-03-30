@@ -38,8 +38,8 @@ function action(e) {
             .then(function (pixData) {
                 if (pixData['json']['hits'].length === 0) {
                     postData('/getpix', {data: 'not found'})
-                        .then (function (na) {
-                            addPixToDom(na);
+                        .then (function (notFound) {
+                            addPixToDom(notFound);
                         })
                 } else {
                     addPixToDom(pixData);
@@ -47,14 +47,14 @@ function action(e) {
             });
         postData('/getgeo', {location: location, country: country})
             .then(function (data) {
-                let newData = data['json'];
+                let geoData = data['json'];
                 let date = document.getElementById('date').value;
                 if (date === '') {
                     alert('Date is missing.')
                 } else {
-                    postData('/getwbit', {data: newData})
-                        .then(function (data) {
-                            postData('/add', {data: data['json']['data']});
+                    postData('/getwbit', {data: geoData})
+                        .then(function (wBitData) {
+                            postData('/add', {data: wBitData['json']['data']});
                             updateUI(date);
                         });
                 }
