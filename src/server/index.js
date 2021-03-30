@@ -25,7 +25,7 @@ app.use(express.static(__dirname + '/dist'))
 
 // Sets landing page
 app.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname + '/dist/index.html'))
+    res.sendFile(path.join('/app' + '/dist/index.html'))
 })
 
 // designates what port the app will listen to for incoming requests
