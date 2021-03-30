@@ -46,7 +46,7 @@ function action(e) {
             //     } else {
             //         addPixToDom(pixData);
             //     }
-            });
+            // });
         getGeoData(e, location)
             .then(function (data) {
                 let date = document.getElementById('date').value;
