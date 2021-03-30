@@ -92,8 +92,20 @@ app.get('/all', (req, res) => {
 
 // POST Data
 app.post('/add', (req, res) => {
-    let newData = req.body;
-    projectData.push(newData);
+    try{
+        let newData = req.body;
+        projectData.push(newData);
+        return res.json({
+            success: true,
+            newData,
+        });
+    } catch (err) {
+        return res.status(500).json({
+          success: false,
+          message: err.message,
+        });
+    }
+
 })
 
 // POST pixData
