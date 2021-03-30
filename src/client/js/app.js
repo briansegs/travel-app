@@ -65,17 +65,6 @@ function action(e) {
 
 // Async Functions
 
-const getData = async (url) => {
-    const res = await fetch(url)
-    try {
-        const data = await res.json();
-        return data;
-    } catch (error) {
-        console.log('error', error);
-    }
-};
-
-
 const postData = async (url = '', data = {}) => {
     const response = await fetch(url, {
         method: 'POST',
@@ -131,4 +120,3 @@ const updateUI = async (date) => {
 
 
 export { action }
-export { getData }
