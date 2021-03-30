@@ -36,6 +36,28 @@ app.listen(port, function () {
     console.log(`Travel app listening on port ${port}!`)
 })
 
+/* functions */
+
+function buildPix(location) {
+    let baseURL = 'https://pixabay.com/api/?';
+    let apiKey = `key=${process.env.PIX_API_KEY}`;
+    let term = location.replace(/\s/g, '+');
+    let searchTerm = `&q=${term}`;
+    let imgType = '&image_type=photo';
+    let url = baseURL + apiKey + searchTerm + imgType;
+    return url
+}
+
+const getData = async (url) => {
+    const res = await fetch(url)
+    try {
+        const data = await res.json();
+        return data;
+    } catch (error) {
+        console.log('error', error);
+    }
+};
+
 
 /* Routes */
 
@@ -50,6 +72,25 @@ app.get('/all', (req, res) => {
 app.post('/add', (req, res) => {
     let newData = req.body;
     projectData.push(newData);
+})
+
+app.get('/getpix', async (req, res) => {
+    try {
+        let location = req.body.data;
+        let pixURL = buildPix(location);
+        let response = getData(pixURL);
+        let json = await response.json();
+        return res.json({
+            success: true,
+            json,
+        });
+
+    } catch (err) {
+        return res.status(500).json({
+          success: false,
+          message: err.message,
+        });
+    }
 })
 
 
