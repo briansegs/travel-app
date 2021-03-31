@@ -5,9 +5,9 @@ import { addWeatherToDom } from './domHandler'
 // Functions
 
 function currentDate () {
-    let d = new Date();
-    let month = ("0" + (d.getMonth() + 1)).slice(-2);
-    let newDate = d.getFullYear()+'-'+month+'-'+ d.getDate();
+    const d = new Date();
+    const month = ("0" + (d.getMonth() + 1)).slice(-2);
+    const newDate = d.getFullYear()+'-'+month+'-'+ d.getDate();
     return newDate
 }
 
@@ -29,8 +29,8 @@ function removeChildren (parent) {
  * Updats the UI with data stored in the server
  */
 function action(e) {
-    let location = document.getElementById('city').value;
-    let country = document.getElementById('country').value;
+    const location = document.getElementById('city').value;
+    const country = document.getElementById('country').value;
     if (location === '' || country === '') {
         alert('city or country is missing');
     } else {
@@ -47,8 +47,8 @@ function action(e) {
             });
         postData('/getgeo', {location: location, country: country})
             .then(function (data) {
-                let geoData = data['json'];
-                let date = document.getElementById('date').value;
+                const geoData = data['json'];
+                const date = document.getElementById('date').value;
                 if (date === '') {
                     alert('Date is missing.')
                 } else {
@@ -93,10 +93,10 @@ const postData = async (url = '', data = {}) => {
 const updateUI = async (date) => {
     const request = await fetch('/all');
     try {
-        let weatherSec = document.querySelector('.col-full');
+        const weatherSec = document.querySelector('.col-full');
         const allData = await request.json();
         const latest = allData[allData.length - 1];
-        let wBitData = latest['data'];
+        const wBitData = latest['data'];
 
         if (date < wBitData[7]['valid_date'] && date >= currentDate()) {
             removeChildren(weatherSec);
