@@ -3,6 +3,7 @@ function tempInFahrenheit (tempInC) {
     return tempInF.toFixed(0)
 };
 
+
 /**
  * Builds a div with weather data
  * Adds div to DOM

@@ -37,6 +37,7 @@ app.listen(port, function () {
     console.log(`Travel app listening on port ${port}!`)
 })
 
+
 /* functions */
 
 function buildPix(location) {
@@ -48,6 +49,7 @@ function buildPix(location) {
     let url = baseURL + apiKey + searchTerm + imgType;
     return url
 }
+
 
 function buildGeo(city, country) {
     const rows = 1;
@@ -61,6 +63,7 @@ function buildGeo(city, country) {
     return url
 }
 
+
 function buildWBit(lat, lon) {
     let baseURL = 'https://api.weatherbit.io/v2.0/forecast/daily?';
     const latCord = `lat=${lat}`;
@@ -69,6 +72,7 @@ function buildWBit(lat, lon) {
     let url = baseURL + latCord + lonCord + apiKey;
     return url
 }
+
 
 const getData = async (url) => {
     const res = await fetch(url)
@@ -108,6 +112,7 @@ app.post('/add', (req, res) => {
 
 })
 
+
 // POST pixData
 app.post('/getpix', async (req, res) => {
     try {
@@ -127,6 +132,7 @@ app.post('/getpix', async (req, res) => {
         });
     }
 })
+
 
 // POST geoData
 app.post('/getgeo', async (req, res) => {
@@ -172,5 +178,6 @@ app.post('/getwbit', async (req, res) => {
         });
     }
 })
+
 
 module.exports = app;
