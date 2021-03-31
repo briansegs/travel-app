@@ -2,7 +2,7 @@ import { addPixToDom } from './pixHandler'
 import { addWeatherToDom } from './domHandler'
 
 
-// Functions
+/* Functions */
 
 function currentDate () {
     const d = new Date();
@@ -63,7 +63,7 @@ function action(e) {
 }
 
 
-// Async Functions
+/* Async Functions */
 
 const postData = async (url = '', data = {}) => {
     const response = await fetch(url, {
