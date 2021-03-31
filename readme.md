@@ -36,12 +36,12 @@ This app will take in the form fields city, country, date of the trip, and provi
 * **Webpack**
 
 ### Development Setup
-1. **Download the project locally:**
+**1. Download the project locally:**
 ```
 git clone https://github.com/briansegs/travel-app
 ```
 
-2. **Create an empty repository in your Github account online. To change the remote repository path in your local repository, use the commands below:**
+**2. Create an empty repository in your Github account online. To change the remote repository path in your local repository, use the commands below:**
 ```
 git remote -v
 git remote remove origin
@@ -55,22 +55,22 @@ git commit -m "your comment"
 git push -u origin main
 ```
 
-4. **Install the dependencies:**
+**3. Install the dependencies:**
 * **Node.js** [Download Page](https://nodejs.org/en/download/)
 * To install project dependencies: `npm i`
 
-5. **Create a developer accounts to obtain API credentials to access APIs:**
+**4. Create a developer accounts to obtain API credentials to access APIs:**
 * [Geonames](http://www.geonames.org/export/web-services.html)
 * [Weatherbit](https://www.weatherbit.io/account/create)
 * [Pixabay](https://pixabay.com/api/docs/)
 
-6. **Creat a .env file in the root of the project directory add your keys:**
+**5. Creat a .env file in the root of the project directory add your keys:**
 ```
 WBIT_API_KEY=<Weather bit API key>
 USER_NAME=<Geonames user name>
 PIX_API_KEY=<Pixabay API key>
 ```
-7. **Running the project:**
+**6. Running the project:**
 * In Development Mode (can't make API calls) - `npm run build-dev`
 * In Production Mode - `npm run build-prod`
     * Run the server - `npm start`
@@ -78,7 +78,7 @@ PIX_API_KEY=<Pixabay API key>
 >**Note** In order to make API calls, you will need to do the following:
 1. Delete the dist folder in the root of the project if it exists
 2. Go into src/server/index.js
-3. Remove the code on line 6
+3. Remove the code on line 6:
 ```
 if (process.env.NODE_ENV == 'development')
 ```
@@ -86,7 +86,7 @@ if (process.env.NODE_ENV == 'development')
 5. Open your browser and go to [http://localhost:8081/](http://localhost:8081/)
 
 
-##### Wishlist For later
+## Wishlist For later
 
 Here are some things I would like to add in the future:
 
