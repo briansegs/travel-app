@@ -10,6 +10,4 @@ import './styles/custom.scss'
 creatOptions();
 
 
-// EventListeners
-
 document.getElementById('generate').addEventListener('click', action);
