@@ -79,7 +79,7 @@ PIX_API_KEY=<Pixabay API key>
 1. Delete the dist folder in the root of the project if it exists
 2. Go into src/server/index.js
 3. Remove the code on line 6:
-```
+```js
 if (process.env.NODE_ENV == 'development')
 ```
 4. run `npm run build-prod` in the command line followed by `npm start`.
